@@ -3,6 +3,6 @@ Simple and fully customizable user interface components. Design for mobile app d
 
 - Platforms: iOS, Android<br><br>
 
-# Component List:
+### Component List:
 
 - Select Text: https://bug7a.github.io/ui-select-text.js/
