@@ -1,4 +1,4 @@
-# UI Components for Cordova
+# Mobile UI Components for Cordova
 Simple and fully customizable user interface components. Design for mobile app development on Apache Cordova framework.
 
 - Platforms: iOS, Android<br><br>
