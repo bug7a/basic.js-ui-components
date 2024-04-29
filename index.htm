@@ -25,6 +25,8 @@
             { type: "normal", title:"Toggle", desc:"ui-toggle.htm", actionType: "url", actionValue: "ui-toggle.htm", searchText: "toggle checkbox" },
             { type: "normal", title:"Page Control", desc:"ui-page-control.htm", actionType: "url", actionValue: "ui-page-control.htm", searchText: "page control" },
             { type: "normal", title:"Tabs", desc:"ui-tabs.htm", actionType: "url", actionValue: "ui-tabs.htm", searchText: "tabs segment" },
+            { type: "normal", title:"Select Text", desc:"select-text.htm", actionType: "url", actionValue: "select-text.htm", searchText: "select text" },
+            { type: "normal", title:"Select Item", desc:"select-item.htm", actionType: "url", actionValue: "select-item.htm", searchText: "select item" },
             { type: "normal", title:"Title", desc:"ui-title.htm", actionType: "url", actionValue: "ui-title.htm", searchText: "title" },
             { type: "normal", title:"Left Title", desc:"ui-left-title.htm", actionType: "url", actionValue: "ui-left-title.htm", searchText: "left title" },
             { type: "normal", title:"Search Input", desc:"ui-search-box.htm", actionType: "url", actionValue: "ui-search-box.htm", searchText: "search box" },
@@ -56,6 +58,7 @@
             { type: "normal", title:"Period Bar", desc:"ui-period-bar.htm", actionType: "url", actionValue: "ui-period-bar.htm", searchText: "period bar date" },
             */
         ];
+        let grpPage = null;
         let icoPreview = null;
         let htmPage = null;
         let grpHtmPage = null;
@@ -67,121 +70,135 @@
         
         window.onload = function() {
 
-            page.fit(600);
+            //page.fit(600);
 
-            // ICON: Preview
-            icoPreview = Icon(30, {
-                top: 240,
-                opacity: 0.4,
-            });
-            that.autoSize = 2;
-            that.load("assets/web/preview/i1.png");
-
-            // BOX: Background
-            Box(0, 0, "100%", "100%");
-            //that.position = "fixed";
-            //that.elem.style.position = "fixed";
-            that.left = 0;
-            that.elem.style.minWidth = "1400px";
-            that.elem.style.background = "linear-gradient(to right, #FFFFFF00, #FFFFFF00, lightgray)";
-            //that.color = "red";
-
-            // GROUP: Componentlerin yüklendiği alan.
-            grpHtmPage = startFlexBox({
-                justifyContent: "flex-end",
-                width: 600,
-                left: 420,
-                //color: "white",
-            });
-            that.elem.style.borderLeft = "1px solid rgba(0, 0, 0, 0.2)";
-            that.elem.style.borderRight = "1px solid rgba(0, 0, 0, 0.2)";
-
-                // UI WEB VIEW: Object description.
-                htmPage = UIWebView.create();
-                that.left = 0;
-                that.top = 0;
-                that.width = 600;
-                that.height = "100%";
-                //htmPage.loadHTMLFile("app-todo.htm");
-
-            endFlexBox();
-
-            // ICON: Logo
-            icoLogo = Icon(40, 30, 278 * 0.6, 142 * 0.6);
-            that.load("assets/web/ui-components-logo.svg");
-
-            // SELECT TEXT: List of components.
-            mySelectText = SelectText({
-                top: 140,
-                left: 40,
-                width: 340,
-                itemDataList: itemDataList,
-                selection_fullScreen: 0,
-            });
-
-            that.onSelect = function(index) {
-                console.log(index);
-                htmPage.loadHTMLFile(itemDataList[index].actionValue);
-                //selectedText = itemDataList[index].actionValue;
-            };
-
-            that.setSelectedIndex(2);
-
-            // LABEL: Full project example button
-            btnExample = Label({
-                left: 1050,
-                top: 30,
-                width: "auto",
-                height: "auto",
-                text: "Full Project Example",
-                //color: "rgba(0, 0, 0, 0.05)",
-                color: "rgba(255, 255, 255, 0.7)",
-                border: 1,
-                borderColor: "rgba(0, 0, 0, 0.2)",
-                round: 6,
-                fontSize: 16,
-                spaceY: 8,
-                spaceX: 18,
-                clickable: 1,
-            });
-            //that.element.style.borderBottom = "3px solid rgba(0, 0, 0, 0.2)";
-            that.elem.style.whiteSpace = "nowrap";
-            that.elem.style.cursor = "pointer";
-            that.onClick(function() {
-                window.open("https://bug7a.github.io/javascript-mobile-app-template/", "_blank");
-            });
-
-            // LABEL: Info.
-            lblInfo = Label({
-                left: 40,
-                bottom: 30,
-                width: 300,
-                fontSize: 12,
-                opacity: 0.8,
-                clickable: 1,
-            });
-            that.text = "Copyright 2020-2024 <b onclick='goto_MySite();' style='cursor: pointer;'>Bugra Ozden</b><br>Licensed under <b onclick='goto_LicensSite();' style='cursor: pointer;'>the Apache License</b>, Version 2.0";
-            
-            boxBottomSpace = Box(0, 0, 40, 40, {
+            grpPage = startBox(0, 0, "100%", "100%", {
                 color: "transparent",
             });
-            that.bottom = 0;
 
+                // ICON: Preview
+                icoPreview = Icon(30, {
+                    top: 240,
+                    opacity: 0.4,
+                });
+                that.autoSize = 2;
+                that.load("assets/web/preview/i1.png");
+
+                // BOX: Background
+                Box(0, 0, "100%", "100%");
+                //that.position = "fixed";
+                //that.elem.style.position = "fixed";
+                that.left = 0;
+                that.elem.style.minWidth = "1400px";
+                that.elem.style.background = "linear-gradient(to right, #FFFFFF00, #FFFFFF00, lightgray)";
+                //that.color = "red";
+
+                // GROUP: Componentlerin yüklendiği alan.
+                grpHtmPage = startFlexBox({
+                    justifyContent: "flex-end",
+                    width: 600,
+                    left: 420,
+                    //color: "white",
+                });
+                that.elem.style.borderLeft = "1px solid rgba(0, 0, 0, 0.2)";
+                that.elem.style.borderRight = "1px solid rgba(0, 0, 0, 0.2)";
+
+                    // UI WEB VIEW: Object description.
+                    htmPage = UIWebView.create();
+                    that.left = 0;
+                    that.top = 0;
+                    that.width = 600;
+                    that.height = "100%";
+                    //htmPage.loadHTMLFile("app-todo.htm");
+
+                endFlexBox();
+
+                // ICON: Logo
+                icoLogo = Icon(40, 30, 278 * 0.6, 142 * 0.6);
+                that.load("assets/web/ui-components-logo.svg");
+
+                // SELECT TEXT: List of components.
+                mySelectText = SelectText({
+                    top: 140,
+                    left: 40,
+                    width: 340,
+                    itemDataList: itemDataList,
+                    selection_fullScreen: 0,
+                });
+
+                that.onSelect = function(index) {
+                    console.log(index);
+                    htmPage.loadHTMLFile(itemDataList[index].actionValue);
+                    //selectedText = itemDataList[index].actionValue;
+                };
+
+                that.setSelectedIndex(2);
+
+                // LABEL: Full project example button
+                btnExample = Label({
+                    left: 1050,
+                    top: 30,
+                    width: "auto",
+                    height: "auto",
+                    text: "Full Project Example",
+                    //color: "rgba(0, 0, 0, 0.05)",
+                    color: "rgba(255, 255, 255, 0.7)",
+                    border: 1,
+                    borderColor: "rgba(0, 0, 0, 0.2)",
+                    round: 6,
+                    fontSize: 16,
+                    spaceY: 8,
+                    spaceX: 18,
+                    clickable: 1,
+                });
+                //that.element.style.borderBottom = "3px solid rgba(0, 0, 0, 0.2)";
+                that.elem.style.whiteSpace = "nowrap";
+                that.elem.style.cursor = "pointer";
+                that.onClick(function() {
+                    window.open("https://bug7a.github.io/javascript-mobile-app-template/", "_blank");
+                });
+
+                // LABEL: Info.
+                lblInfo = Label({
+                    left: 40,
+                    bottom: 30,
+                    width: 300,
+                    fontSize: 12,
+                    opacity: 0.8,
+                    clickable: 1,
+                });
+                that.text = "Copyright 2020-2024 <b onclick='goto_MySite();' style='cursor: pointer;'>Bugra Ozden</b><br>Licensed under <b onclick='goto_LicensSite();' style='cursor: pointer;'>the Apache License</b>, Version 2.0";
+                
+                boxBottomSpace = Box(0, 0, 40, 40, {
+                    color: "transparent",
+                });
+                that.bottom = 0;
+
+            endBox();
+
+            /*
             page.mainBox.scrollY = 1;
             page.mainBox.scrollX = 1;
-            page.scrollBar = ScrollBar({
-                scrollableBox: page.mainBox,
-            });
+            */
 
-            //resized();
-            //page.onResize(resized);
+            grpPage.scrollX = 1;
+            /*
+            
+            grpPage.scrollBar = ScrollBar({
+                scrollableBox: grpPage,
+            });
+            */
+
+            resized();
+            page.onResize(resized);
 
         };
 
         const resized = function() {
 
-            page.fit(600);
+            //page.fit(600);
 
+            /*
             if (page.width < 1000) {
                 htmPage.top = 220;
                 grpHtmPage.left = 0;
@@ -197,6 +214,7 @@
                 boxBottomSpace.bottom = 0;
                 icoPreview.visible = 1;
             }
+            */
 
         };
 
@@ -207,26 +225,6 @@
         const goto_LicensSite = function() {
             window.open("http://www.apache.org/licenses/LICENSE-2.0", "_blank");
         }
-
-
-        // SELECT TEXT: List of components.
-        mySelectText = SelectText({
-            top: 140,
-            left: 40,
-            width: 340,
-            itemDataList: itemDataList,
-            selection_fullScreen: 0,
-            search_visible: 1,
-        });
-        
-        that.onSelect = function(index) {
-            console.log(index);
-            console.log(itemDataList[index].label);
-        };
-
-        that.setSelectedIndex(0);
-
-
 
         </script>
 
