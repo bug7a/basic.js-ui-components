@@ -1,11 +1,11 @@
 # basic.js UI Components (JavaScript)
-Simple and fully customizable user interface components. Design for mobile app development on Apache Cordova framework.
+Simple and fully customizable user interface components. Design for mobile app development.
 
-- Platforms: iOS, Android<br><br>
+- Platforms: Web, iOS, Android<br><br>
 
 ### All Component in One Project:
 
-- Mobile UI Template: https://bug7a.github.io/cordova-mobile-app-ui-template/
+- Mobile UI Template: https://bug7a.github.io/javascript-mobile-app-template/
 
 ### Component List:
 
