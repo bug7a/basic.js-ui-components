@@ -25,20 +25,20 @@ const SelectTextItem = function(params = {}) {
 
     // Default values
     const defaults = {
-        width: 350,
+        width: "100%",
         height: 50,
     };
 
     box.props(defaults, params);
 
     // *** Private variables:
-    let privateVar = "";
+    //let privateVar = "";
 
     // *** Public variables:
-    box.publicVar = "";
+    //box.publicVar = "";
 
     // *** Private functions:
-    const privateFunc = () => {};
+    //const privateFunc = () => {};
 
     // *** Public functions:
     box.publicFunc = () => {};
@@ -76,8 +76,8 @@ const SelectTextItem = function(params = {}) {
     endBox();
 
     // *** OBJECT INIT CODE:
-    box.setWidth(box.width);
-    box.setHeight(box.height);
+    //box.setWidth(box.width);
+    //box.setHeight(box.height);
 
     box.elem.addEventListener("mouseover", function() {
         box.color = "white";

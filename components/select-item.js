@@ -44,6 +44,7 @@ const SelectItem = function(params = {}) {
         selection_cancelButtonText: "CANCEL",
         selection_cancelButtonHeight: 50,
         search_visible: 1,
+        search_autoFocus: 1, // Mobil de kapatılmaz ise, otomatik klavye çıkar.
         search_placeHolder: "Search",
         search_backgroundColor: "#FFFCD6", // "#FFFCD6", "#D3CFC1"
     };
@@ -336,7 +337,9 @@ SelectItem.SelectItemList = function(box) {
                     placeholderText: box.search_placeHolder,
                     darkMode: box.darkMode,
                 });
-                container.searchInput.focus();
+                if (box.search_autoFocus == 1) {
+                    container.searchInput.focus();
+                }
             }
 
             let moreHeight = 0;

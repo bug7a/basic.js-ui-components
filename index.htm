@@ -10,14 +10,14 @@
         <!-- LIBRARY FILES -->
         <!-- <link rel="preload" href="basic/font/open-sans/OpenSans-Regular.ttf" as="font" crossorigin="anonymous"> -->
         <link rel="stylesheet" type="text/css" href="basic/basic.min.css">
-        <script src="basic/basic.js" type="text/javascript" charset="utf-8"></script>
+        <script src="basic/basic.min.js" type="text/javascript" charset="utf-8"></script>
 
-        <script src="components/scroll-bar.js" type="text/javascript" charset="utf-8"></script>
-        <script src="components/select-text.js" type="text/javascript" charset="utf-8"></script>
-        <script src="components/select-item.js" type="text/javascript" charset="utf-8"></script>
-        <script src="components/item-list.js" type="text/javascript" charset="utf-8"></script>
-        <script src="components/search-input.js" type="text/javascript" charset="utf-8"></script>
-        <script src="components/ui-web-view.js" type="text/javascript" charset="utf-8"></script>
+        <script src="components/scroll-bar.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="components/select-text.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="components/select-item.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="components/item-list.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="components/search-input.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="components/ui-web-view.min.js" type="text/javascript" charset="utf-8"></script>
 
         <script>
         
@@ -70,7 +70,7 @@
         
         window.onload = function() {
 
-            //page.fit(600);
+            page.fit(600);
 
             grpPage = startBox(0, 0, "100%", "100%", {
                 color: "transparent",
@@ -182,12 +182,14 @@
             */
 
             grpPage.scrollX = 1;
-            /*
+            
             
             grpPage.scrollBar = ScrollBar({
                 scrollableBox: grpPage,
+                scrollOnContent: 0,
             });
-            */
+            //grpPage.scrollBar.color = "rgba(0, 0, 0, 0.3)";
+            
 
             resized();
             page.onResize(resized);
@@ -196,7 +198,7 @@
 
         const resized = function() {
 
-            //page.fit(600);
+            page.fit(600);
 
             /*
             if (page.width < 1000) {

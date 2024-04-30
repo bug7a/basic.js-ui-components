@@ -3,7 +3,7 @@
 
 /*
 
-basic.js (v24.28) Create interactive user interfaces with basic programming skills.
+basic.js (v24.04) Create interactive user interfaces with basic programming skills.
 - Project Site: https://bug7a.github.io/basic.js/
 
 Copyright 2020-2024 Bugra Ozden <bugra.ozden@gmail.com>
@@ -99,7 +99,7 @@ win.that = null;
 win.previousThat = null;
 win.prevThat = null;
 
-let defaultContainerBox;
+let defaultContainerBox = null;
 let previousDefaultContainerBox;
 let loopTimer;
 const resizeDetection = {};
@@ -895,7 +895,11 @@ class BBox extends Basic_UIComponent {
 
         this._element = divElement;
         this._containerBox = defaultContainerBox;
-        defaultContainerBox.element.appendChild(this._element);
+        if (defaultContainerBox != null) {
+            defaultContainerBox.element.appendChild(this._element);
+        } else {
+            console.error("basic.js: The library is not yet ready for use. Put your code in window.onload");
+        }
 
         this.width = $width;
         this.height = $height;
@@ -973,13 +977,13 @@ class BBox extends Basic_UIComponent {
     }
 
     add($obj) {
-        if ($obj.containerBox != this) {
+        //if ($obj.containerBox != this) {
             // Eklenen nesnenin, üst nesnesini değiştir.
             $obj.containerBox = this;
             // İçine başka bir nesne eklendiğinde, artık basılabilir.
             //this.clickable = 1;
             this.element.appendChild($obj.contElement);
-        }
+        //}
     }
 
     // Ağaç şeklinde kod blokları oluştumak için bir teknik. (Deneysel Teknik)
