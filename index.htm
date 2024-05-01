@@ -187,12 +187,15 @@
             grpPage.scrollBar = ScrollBar({
                 scrollableBox: grpPage,
                 scrollOnContent: 0,
+                neverHide: 1,
             });
             //grpPage.scrollBar.color = "rgba(0, 0, 0, 0.3)";
             
 
             resized();
             page.onResize(resized);
+
+            grpPage.elem.addEventListener('scroll', scrolled);
 
         };
 
@@ -217,6 +220,77 @@
                 icoPreview.visible = 1;
             }
             */
+
+        };
+
+        function smoothScrollTo(element, to, duration) {
+            var start = element.scrollLeft,
+                change = to - start,
+                currentTime = 0,
+                increment = 20;
+
+            function animateScroll() {
+                currentTime += increment;
+                var val = easeInOutQuad(currentTime, start, change, duration);
+                element.scrollLeft = val;
+                if (currentTime < duration) {
+                    requestAnimationFrame(animateScroll);
+                }
+            }
+
+            animateScroll();
+        }
+
+        function easeInOutQuad(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t + b;
+            t--;
+            return -c / 2 * (t * (t - 2) - 1) + b;
+        }
+
+        // DENEYSEL: MOBILE DE YATAY KULLANIM: SAYFALARIN YATAY OLARAK DİZİLMESİ VE KAYDIRILMASI
+        const scrolled = function() {
+
+            const scrollLeft = grpPage.elem.scrollLeft;
+            const clientWidth = grpPage.clientWidth;
+            const scrollWidth = grpPage.elem.scrollWidth;
+
+            if (grpPage.scrollX == 1) {
+
+                if (scrollLeft > 50 && scrollLeft < 100) {
+                    grpPage.scrollX = 0;
+                    smoothScrollTo(grpPage.elem, 420, 200);
+                    setTimeout(function() {
+                        grpPage.scrollX = 1;
+                    }, 400);
+                }
+
+                if (scrollLeft < (420 - 50) && scrollLeft > (420 - 100)) {
+                    grpPage.scrollX = 0;
+                    smoothScrollTo(grpPage.elem, 0, 200);
+                    setTimeout(function() {
+                        grpPage.scrollX = 1;
+                    }, 400);
+                }
+
+                if (scrollLeft > 470 && scrollLeft < 520) {
+                    grpPage.scrollX = 0;
+                    smoothScrollTo(grpPage.elem, 800, 200);
+                    setTimeout(function() {
+                        grpPage.scrollX = 1;
+                    }, 400);
+                }
+                
+                if (scrollLeft < (800 - 50) && scrollLeft > (800 - 100)) {
+                    grpPage.scrollX = 0;
+                    smoothScrollTo(grpPage.elem, 420, 200);
+                    setTimeout(function() {
+                        grpPage.scrollX = 1;
+                    }, 400);
+                }
+                
+
+            }
 
         };
 
