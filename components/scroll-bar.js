@@ -39,6 +39,7 @@ const ScrollBar = function(params = {}) {
         bar_padding: 2,
         bar_color: "#141414",
         scrollOnContent: 1,
+        neverHide: 0,
     };
 
     box.props(defaults, params);
@@ -58,7 +59,9 @@ const ScrollBar = function(params = {}) {
             if (box.mouseMoving == 1) {
                 closeAuto();
             } else {
-                box.boxScrollBarTop.opacity = 0;
+                if (box.neverHide == 0) {
+                    box.boxScrollBarTop.opacity = 0;
+                }
             }
         }, 4000);
     }
@@ -102,7 +105,9 @@ const ScrollBar = function(params = {}) {
 
         // Eğer scroll a gerek yok ise scroll bar ı gizle.
         if (scrollWidth == clientWidth || box.scrollableBox.scrollX == 0) {
-            box.boxScrollBarLeft.visible = 0;
+            if (box.neverHide == 0 || scrollWidth == clientWidth) { 
+                box.boxScrollBarLeft.visible = 0;
+            }
         } else if (box.scrollableBox.scrollX == 1) {
             box.boxScrollBarLeft.visible = 1;
         }
@@ -135,7 +140,9 @@ const ScrollBar = function(params = {}) {
 
         // Eğer scroll a gerek yok ise scroll bar ı gizle.
         if (scrollHeight == clientHeight || box.scrollableBox.scrollY == 0) {
-            box.boxScrollBarTop.visible = 0;
+            if (box.neverHide == 0 || scrollHeight == clientHeight) { 
+                box.boxScrollBarTop.visible = 0;
+            }
         } else if (box.scrollableBox.scrollY == 1) {
             box.boxScrollBarTop.visible = 1;
         }
@@ -343,7 +350,7 @@ const ScrollBar = function(params = {}) {
                 box.mouseY = 0;
                 setTimeout(function() {
                     box.clickable = 1;
-                }, 20);
+                }, 100);
                 box.elem.addEventListener('mousemove', mouseMoved_contentDrag);
                 box.mouseDownForScrolling = 0;
             }
