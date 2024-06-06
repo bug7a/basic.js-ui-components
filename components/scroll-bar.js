@@ -2,13 +2,12 @@
 
 /*
 
-Scroll Bar - v24.04
+Scroll Bar - v24.06
 
 UI COMPONENT TEMPLATE
 - You can customize, this template code as you need:
 
 
-Started Date: April 2024
 Developer: Bugra Ozden
 Email: bugra.ozden@gmail.com
 Site: https://bug7a.github.io/javascript-mobile-app-template/
@@ -38,7 +37,7 @@ const ScrollBar = function(params = {}) {
         bar_mouseOverOpacity: 0.6,
         bar_padding: 2,
         bar_color: "#141414",
-        scrollOnContent: 1,
+        //scrollOnContent: 1,
         neverHide: 0,
     };
 
@@ -46,6 +45,7 @@ const ScrollBar = function(params = {}) {
 
     // *** Private variables:
     //let privateVar = "";
+    let _fullscreenBox = null;
 
     // *** Public variables:
     //box.publicVar = "";
@@ -158,6 +158,7 @@ const ScrollBar = function(params = {}) {
 
     };
 
+    /*
     const mouseMoved_contentDrag = function(event) {
 
         box.mouseMoving = 1;
@@ -187,6 +188,7 @@ const ScrollBar = function(params = {}) {
         closeAuto();
 
     };
+    */
 
     const mouseMoved_scrollbarButton = function(event) {
 
@@ -280,38 +282,54 @@ const ScrollBar = function(params = {}) {
     box.boxScrollBarTop.elem.style.cursor = "default";
     box.boxScrollBarLeft.elem.style.cursor = "default";
 
-    // Mouse scroll bar butonu üzerine gelindiğinde;
-    box.boxScrollBarTop.elem.addEventListener("mouseover", function(event) {
+    const _highlightTopBar = function() {
         box.boxScrollBarTop.width = box.bar_mouseOverWidth;
         box.boxScrollBarTop.color = box.bar_mouseOverColor;
         box.boxScrollBarTop.opacity = box.bar_mouseOverOpacity;
-        //event.stopPropagation();
+    };
+
+    const _lowlightTopBar = function() {
+        box.boxScrollBarTop.width = box.bar_width;
+        box.boxScrollBarTop.color = box.bar_color;
+        box.boxScrollBarTop.opacity = box.bar_opacity;
+    };
+
+    // Mouse scroll bar butonu üzerine gelindiğinde;
+    box.boxScrollBarTop.elem.addEventListener("mouseover", function(event) {
+        _highlightTopBar();
     });
 
     // Mouse scroll bar butonu üzerindeyken bırakılır ise;
     box.boxScrollBarTop.elem.addEventListener("mouseout", function(event) {
-        box.boxScrollBarTop.width = box.bar_width;
-        box.boxScrollBarTop.color = box.bar_color;
-        box.boxScrollBarTop.opacity = box.bar_opacity;
-        closeAuto();
-        //event.stopPropagation();
+        if (box.boxScrollBarTop.clicked != 1) {
+            _lowlightTopBar();
+            closeAuto();
+        }
     });
 
-    // Mouse scroll bar butonu üzerine gelindiğinde;
-    box.boxScrollBarLeft.elem.addEventListener("mouseover", function(event) {
+    const _highlightLeftBar = function() {
         box.boxScrollBarLeft.height = box.bar_mouseOverWidth;
         box.boxScrollBarLeft.color = box.bar_mouseOverColor;
         box.boxScrollBarLeft.opacity = box.bar_mouseOverOpacity;
-        //event.stopPropagation();
+    };
+
+    const _lowlightLeftBar = function() {
+        box.boxScrollBarLeft.height = box.bar_width;
+        box.boxScrollBarLeft.color = box.bar_color;
+        box.boxScrollBarLeft.opacity = box.bar_opacity;
+    };
+
+    // Mouse scroll bar butonu üzerine gelindiğinde;
+    box.boxScrollBarLeft.elem.addEventListener("mouseover", function(event) {
+        _highlightLeftBar();
     });
 
     // Mouse scroll bar butonu üzerindeyken bırakılır ise;
     box.boxScrollBarLeft.elem.addEventListener("mouseout", function(event) {
-        box.boxScrollBarLeft.height = box.bar_width;
-        box.boxScrollBarLeft.color = box.bar_color;
-        box.boxScrollBarLeft.opacity = box.bar_opacity;
-        closeAuto();
-        //event.stopPropagation();
+        if (box.boxScrollBarLeft.clicked != 1) {
+            _lowlightLeftBar();
+            closeAuto();
+        }
     });
 
     // Mouse, scroll edilecek alana girer ise;
@@ -332,6 +350,7 @@ const ScrollBar = function(params = {}) {
     });
 
     // *** TEST ***
+    /*
     if (box.scrollOnContent == 1) {
         box.scrollableBox.elem.addEventListener("mousedown", function(event) { // mousedown
             box.mouseDownForScrolling = 1;
@@ -339,10 +358,17 @@ const ScrollBar = function(params = {}) {
         });
         box.scrollableBox.elem.addEventListener("mouseup", function(event) { // mousedown
             box.mouseDownForScrolling = 0;
+            //box.clickable = 0;
             //box.elem.style.cursor = "";
             box.elem.style.cursor = "default"; // TODO: Silinebilir
             box.boxScrollBarTop.elem.style.cursor = "default";
             box.boxScrollBarLeft.elem.style.cursor = "default";
+            
+        });
+        box.elem.addEventListener("mouseup", function(event) { // mousedown
+            box.mouseDownForScrolling = 0;
+            box.clickable = 0;
+            box.elem.style.cursor = "default"; // TODO: Silinebilir
         });
         box.scrollableBox.elem.addEventListener("mousemove", function(event) { // mousedown
             if (box.mouseDownForScrolling == 1) {
@@ -350,64 +376,88 @@ const ScrollBar = function(params = {}) {
                 box.mouseY = 0;
                 setTimeout(function() {
                     box.clickable = 1;
-                }, 100);
+                }, 200);
                 box.elem.addEventListener('mousemove', mouseMoved_contentDrag);
                 box.mouseDownForScrolling = 0;
             }
             //event.stopPropagation();
         });
     }
+    */
+
+    const _enterScrolling = function() {
+
+        box.mouseX = 0;
+        box.mouseY = 0;
+        //box.clickable = 0;
+
+        _fullscreenBox = Box(0, 0, "100%", "100%", {
+            color: "transparent",
+            clickable: 1,
+        });
+        that.elem.style.cursor = "grabbing";
+        page.add(that);
+
+        _fullscreenBox.elem.addEventListener('mousemove', mouseMoved_scrollbarButton);
+
+        const _exitScrolling = function() {
+
+            box.mouseMoving = 0;
+            box.boxScrollBarLeft.clicked = 0;
+            box.boxScrollBarTop.clicked = 0;
+            //box.clickable = 0;
+
+            closeAuto();
+            _lowlightTopBar();
+            _lowlightLeftBar();
+            _fullscreenBox.remove();
+
+        };
+
+        _fullscreenBox.elem.addEventListener("mouseup", function(event) {
+            _exitScrolling();
+        });
+
+        _fullscreenBox.elem.addEventListener("mouseleave", function(event) {
+            _exitScrolling();
+        });
+
+    }
 
     // Sağdaki scroll bar butonuna basılırsa;
     box.boxScrollBarTop.elem.addEventListener("mousedown", function(event) { // mousedown
-        box.mouseX = 0;
-        box.mouseY = 0;
-        box.clickable = 1;
+
         box.boxScrollBarTop.clicked = 1;
-        box.elem.style.cursor = "grabbing"; // TODO: Silinebilir
-        box.boxScrollBarTop.elem.style.cursor = "grabbing";
-        box.elem.addEventListener('mousemove', mouseMoved_scrollbarButton);
-        //event.stopPropagation();
+        _enterScrolling();
+
     });
 
     // Alttaki scroll bar butonuna basılırsa;
     box.boxScrollBarLeft.elem.addEventListener("mousedown", function(event) { // mousedown
-        box.mouseX = 0;
-        box.mouseY = 0;
-        box.clickable = 1;
+
         box.boxScrollBarLeft.clicked = 1;
-        box.elem.style.cursor = "grabbing"; // TODO: Silinebilir
-        box.boxScrollBarLeft.elem.style.cursor = "grabbing";
-        box.elem.addEventListener('mousemove', mouseMoved_scrollbarButton);
-        //event.stopPropagation();
+        _enterScrolling();
+
     });
 
-    // Mouse nesne alanının içinde bırakılır ise;
-    box.elem.addEventListener("mouseup", function(event) {
-        box.mouseMoving = 0;
-        box.elem.removeEventListener('mousemove', mouseMoved_scrollbarButton);
-        box.elem.removeEventListener('mousemove', mouseMoved_contentDrag);
-        box.boxScrollBarLeft.clicked = 0;
-        box.boxScrollBarTop.clicked = 0;
-        box.clickable = 0;
-        box.elem.style.cursor = "default"; // TODO: Silinebilir
-        box.boxScrollBarTop.elem.style.cursor = "default";
-        box.boxScrollBarLeft.elem.style.cursor = "default";
-        closeAuto();
+    // scrollHeight değişirse, refreshScroll() çalıştır.
+    const contentDiv = box.scrollableBox.elem;
+    let lastScrollHeight = contentDiv.scrollHeight;
+
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            if (lastScrollHeight !== contentDiv.scrollHeight) {
+                //console.log('Scroll height changed:', contentDiv.scrollHeight);
+                box.refreshScroll();
+                lastScrollHeight = contentDiv.scrollHeight;
+            }
+        });
     });
 
-    // Mouse nesne alanının dışına çıkar ise;
-    box.elem.addEventListener("mouseleave", function(event) {
-        box.mouseMoving = 0;
-        box.elem.removeEventListener('mousemove', mouseMoved_scrollbarButton);
-        box.elem.removeEventListener('mousemove', mouseMoved_contentDrag);
-        box.boxScrollBarLeft.clicked = 0;
-        box.boxScrollBarTop.clicked = 0;
-        box.clickable = 0;
-        box.elem.style.cursor = "default"; // TODO: Silinebilir
-        box.boxScrollBarTop.elem.style.cursor = "default";
-        box.boxScrollBarLeft.elem.style.cursor = "default";
-        closeAuto();
+    observer.observe(contentDiv, {
+        childList: true,
+        subtree: true,
+        characterData: true
     });
     
     makeBasicObject(box);
