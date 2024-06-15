@@ -2,6 +2,8 @@
 
 /*
 
+Waiting - v24.06
+
 UI COMPONENT TEMPLATE
 - You can customize, this template code as you need:
 
@@ -12,7 +14,7 @@ Email: bugra.ozden@gmail.com
 Site: https://bug7a.github.io/javascript-mobile-app-template/
 
 
-EXAMPLE: {javascript-mobile-app-template}/ui-waiting-view.htm
+EXAMPLE: {javascript-mobile-app-template}/waiting.htm
 
 
 */

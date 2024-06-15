@@ -2,40 +2,41 @@
 
 /*
 
-Component Template - v24.04
+Component Template - v24.06
 
 UI COMPONENT TEMPLATE
 - You can customize, this template code as you need:
 
 
-Started Date: February 2024
+Started Date: June 2024
 Developer: Bugra Ozden
 Email: bugra.ozden@gmail.com
-Site: https://bug7a.github.io/javascript-mobile-app-template/
-
-
-EXAMPLE: {javascript-mobile-app-template}/comp-name.htm
-
+Web: https://bug7a.github.io/basic.js-ui-components/
 
 */
 
 "use strict";
-const CompName = (params = {}) => {
-
-    // BOX: Component container
-    const box = startBox();
+const CompName = function(params = {}) {
 
     // Default values
     const defaults = {
         border: 0,
         color: "transparent",
-        opacity: 0,
-        visible: 0,
-        width: box.containerBox.width,
-        height: box.containerBox.height,
-        _x: 0,
+        width: null, // or "100%"
+        height: null,
+        coverBackgroundColor: "red",
     };
 
+    if (params == "get") return defaults; // CompName("get").border
+
+    // BOX: Component container
+    const box = startObject();
+
+    // after box created
+    defaults.width = box.containerBox.width;
+    defaults.height = box.containerBox.height;
+
+    // Values ready to use
     box.props(defaults, params);
 
     // *** Private variables:
@@ -45,51 +46,39 @@ const CompName = (params = {}) => {
     box.publicVar = "";
 
     // *** Private functions:
-    const privateFunc = () => {};
+    const privateFunc = function() {};
 
     // *** Public functions:
-    box.publicFunc = () => {};
+    box.publicFunc = function() {};
 
     // Set a param after created.
-    box.setColor = (color) => {
+    box.setColor = function(color) {
         box.color = color;
     };
     // USAGE: get: componentName.color, set: componentName.setColor("red")
 
-    // IT IS USELESS
-    Object.defineProperty(box, 'x', {
-        // Getter
-        get: function() {
-            return this._x;
-        },
-        // Setter
-        set: function(value) {
-            this._x = value;
-        }
+    // OBJECT VIEW:
+    box.setMotion("opacity 0.2s");
+    
+    // BOX: Cover.
+    box.coverBox = Box(0, 0, "100%", "100%", {
+        color: box.coverBackgroundColor,
     });
 
-        // *** OBJECT TEMPLATE:
-        box.setMotion("opacity 0.2s");
-        
-        // BOX: Cover.
-        box.boxCover = Box(0, 0, box.width, box.height);
-        that.color = box.coverBackgroundColor;
+    // ICON: Logo image.
+    box.icoLogo = Icon({
+        width: 50,
+        height: 50,
+        opacity: 1,
+    });
+    //that.load(box.waitingIconFile);
+    that.center();
 
-        // ICON: Logo image.
-        box.imgLogo = Icon();
-        that.width = 50;
-        that.height = 50;
-        that.load(box.waitingIconFile);
-        that.opacity = 1;
-        that.center();
-
-    endBox();
-
-    // *** OBJECT INIT CODE:
-    box.left = 0;
-    box.top = 0;
+    // OBJECT INIT CODE:
+    box.on("click", function() {
+        console.log("clicked")
+    });
     
-    makeBasicObject(box);
-    return box;
+    return endObject(box);
 
 };

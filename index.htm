@@ -11,8 +11,8 @@
         <!-- <link rel="preload" href="basic/font/open-sans/OpenSans-Regular.ttf" as="font" crossorigin="anonymous"> -->
         <link rel="stylesheet" type="text/css" href="basic/basic.min.css">
         <script src="basic/basic.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="basic/scroll-bar.min.js" type="text/javascript" charset="utf-8"></script>
 
-        <script src="components/scroll-bar.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="components/select-text.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="components/select-item.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="components/item-list.min.js" type="text/javascript" charset="utf-8"></script>
@@ -22,6 +22,8 @@
         <script>
         
         const itemDataList = [
+            { type: "normal", title:"Tiny Select (New)", desc:"tiny-select.htm", actionType: "url", actionValue: "tiny-select.htm", searchText: "tiny select text" },
+            { type: "normal", title:"Check Box (New)", desc:"check-box.htm", actionType: "url", actionValue: "check-box.htm", searchText: "check box" },
             { type: "normal", title:"Toggle", desc:"ui-toggle.htm", actionType: "url", actionValue: "ui-toggle.htm", searchText: "toggle checkbox" },
             { type: "normal", title:"Page Control", desc:"ui-page-control.htm", actionType: "url", actionValue: "ui-page-control.htm", searchText: "page control" },
             { type: "normal", title:"Tabs", desc:"ui-tabs.htm", actionType: "url", actionValue: "ui-tabs.htm", searchText: "tabs segment" },
@@ -132,7 +134,7 @@
                     //selectedText = itemDataList[index].actionValue;
                 };
 
-                that.setSelectedIndex(2);
+                that.setSelectedIndex(0);
 
                 // LABEL: Full project example button
                 btnExample = Label({

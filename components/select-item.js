@@ -115,7 +115,7 @@ const SelectItem = function(params = {}) {
         if (index == -1) {
 
         // Eğer dataList te seçimin karşılığı var ise.
-        } else if (index < itemDataList.length) {
+        } else if (index < box.itemDataList.length) {
 
             box.selectedIndex = index;
             
