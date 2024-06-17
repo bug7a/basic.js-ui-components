@@ -22,19 +22,26 @@ EXAMPLE: {javascript-mobile-app-template}/waiting.htm
 "use strict";
 const Waiting = function(params = {}) {
 
-    const box = startObject();
-
     const defaults = {
         border: 0,
+        label: "",
         color: "transparent",
         opacity: 0,
         visible: 0,
-        width: box.containerBox.width,
-        height: box.containerBox.height,
+        width: "100%",
+        height: "100%",
         waitingIcon: "components/ui-waiting-view/clock.png",
         coverBackgroundColor: "rgba(0, 0, 0, 0.4)",
+        onHide: function() {},
     };
 
+    if (params == "get") return defaults; // CompName("get").border
+
+    // BOX: Component container
+    const box = startObject();
+    page.add(box);
+
+    // Values ready to use
     box.props(defaults, params);
 
     box.show = function() {
@@ -46,15 +53,32 @@ const Waiting = function(params = {}) {
         
     }
     
-    box.hide = function() {
+    // - timer: şu kadar süre sonra kapat.
+    // - remove: eğer 1 ise görünmez yaptıktan sonra nesneyi siler.
+    box.hide = function(timer = 0, $remove = 0) {
     
-        box.withMotion(function(self) {
-            box.opacity = 0;
-        });
+        // Hide layer
         setTimeout(function() {
-            box.visible = 0;
-        }, 250);
+            
+            box.withMotion(function(self) {
+                box.opacity = 0;
+            });
+
+            setTimeout(function() {
+                box.visible = 0;
+                box.onHide();
+                if ($remove == 1) {
+                    box.remove();
+                }
+            }, 250);
+
+        }, timer);
     
+    };
+
+    box.setLabel = function(label) {
+        box.lbl.text = label;
+        box.lbl.visible = 1;
     }
 
     // *** OBJECT VIEW:
@@ -62,6 +86,7 @@ const Waiting = function(params = {}) {
     
     // BOX: Cover.
     box.coverBox = startFlexBox({
+        flexDirection: "column",
         color: box.coverBackgroundColor,
         clickable: 1,
     });
@@ -74,6 +99,16 @@ const Waiting = function(params = {}) {
             opacity: 1,
         });
         that.load(box.waitingIcon);
+
+        // LABEL: Some text.
+        box.lbl = Label({
+            textColor: "rgba(0, 0, 0, 0.8)",
+            text: box.label,
+            opacity: 1,
+            visible: (box.label == "") ? 0 : 1,
+        });
+        box.lbl.elem.fontFamily = "opensans-bold";
+
 
     endFlexBox();
 

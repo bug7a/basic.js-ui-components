@@ -2,7 +2,7 @@
 <html>
     <head>
         
-        <title>UI Waiting View</title>
+        <title>Waiting</title>
         
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -31,23 +31,23 @@
                 border: 1,
                 borderColor: "rgba(0, 0, 0, 0.3)",
             });
-            that.onResize(function(self) {
-                self.center("left");
+            btnAction.center("left");
+            page.onResize(function() {
+                btnAction.center("left");
             });
 
-            // WAITING: It prevents the user from touching the screen until the process is complete.
+            // WAITING: Create object 1 time.
             waiting = Waiting();
 
-            btnAction.onClick(function(self) {
-                
+            btnAction.on("click", function() {
+
+                //waiting.setLabel("Loading...");
                 // Show waiting
                 waiting.show();
-
-                // After the process is complete:
-                setTimeout(function() {
-                    // Hide waiting
-                    waiting.hide();
-                }, 1500);
+                // Hide 1500ms later and dont remove on hide.
+                waiting.hide(1500, 0);
+                // When task is finished: hide directly
+                // waiting.hide();
 
             });
 

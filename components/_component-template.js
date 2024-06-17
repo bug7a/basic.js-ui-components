@@ -40,21 +40,21 @@ const CompName = function(params = {}) {
     box.props(defaults, params);
 
     // *** Private variables:
-    let privateVar = "";
+    //let privateVar = "";
 
     // *** Public variables:
-    box.publicVar = "";
+    //box.publicVar = "";
 
     // *** Private functions:
-    const privateFunc = function() {};
+    //const privateFunc = function() {};
 
     // *** Public functions:
-    box.publicFunc = function() {};
+    //box.publicFunc = function() {};
 
     // Set a param after created.
-    box.setColor = function(color) {
-        box.color = color;
-    };
+    //box.setColor = function(color) {
+    //    box.color = color;
+    //};
     // USAGE: get: componentName.color, set: componentName.setColor("red")
 
     // OBJECT VIEW:
