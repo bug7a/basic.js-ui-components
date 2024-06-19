@@ -40,7 +40,7 @@ const TinySelect = function(params = {}) {
         arrow_size: 24,
         list_fontSize: 14,
         list_textColor: "rgba(0, 0, 0, 0.8)",
-        list_overTextColor: "orangered",
+        list_overTextColor: "indianred",
         emptyText: "Empty",
     };
 
