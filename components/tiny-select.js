@@ -17,7 +17,7 @@ Web: https://bug7a.github.io/basic.js-ui-components/
 
 "use strict";
 const TinySelect = function(params = {}) {
-
+    
     // Default values
     const defaults = {
         title: "",
@@ -44,7 +44,7 @@ const TinySelect = function(params = {}) {
         emptyText: "Empty",
     };
 
-    if (params == "get") return defaults;
+    if (params == "get") return defaults; // CompName("get").border
 
     saveCurrentThat();
 
@@ -54,7 +54,7 @@ const TinySelect = function(params = {}) {
     // Values ready to use
     box.props(defaults, params);
 
-    // *** Public functions:
+    // *** PRIVATE VARIABLES:
 
     // To close listBox if opened (when listBox created will also put a function in this)
     box.closeListBox = null;
@@ -147,9 +147,15 @@ const TinySelect = function(params = {}) {
 
     };
 
-    // - listeyi güncelle ve index i verileni seç
-    // list: [{ id: "1", label: "(none)" },]
-    // selectedIndex: 0
+    /*
+        - listeyi güncelle ve index i verileni seç
+
+        list: [{ id: "1", label: "(none)" },]
+        selectedIndex: 0
+
+        object.setList([{ id: "1", label: "(none)" },], 0);
+
+    */
     box.setList = function(list, selectedIndex = 0) {
 
         box.list = list;
@@ -208,7 +214,7 @@ const TinySelect = function(params = {}) {
     };
     // USAGE: get: componentName.color, set: componentName.setColor("red")
 
-    // OBJECT VIEW:
+    // *** OBJECT VIEW:
     box.elem.style.whiteSpace = "nowrap";
     box.elem.style.cursor = "pointer";
     box.clickable = 1;

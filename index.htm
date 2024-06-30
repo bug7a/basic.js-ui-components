@@ -82,12 +82,14 @@
             });
 
                 // ICON: Preview
+                
                 icoPreview = Icon(30, {
                     top: 240,
                     opacity: 0.4,
                 });
                 that.autoSize = 2;
                 that.load("assets/web/preview/i1.png");
+                
 
                 // BOX: Background
                 Box(0, 0, "100%", "100%");
@@ -122,6 +124,62 @@
                 icoLogo = Icon(40, 30, 278 * 0.6, 142 * 0.6);
                 that.load("assets/web/ui-components-logo.svg");
 
+                /*
+                const _searchInput = SearchInput({
+                    top: 140,
+                    left: 40,
+                    width: 340,
+                    height: 40,
+                    color: "whitesmoke",
+                    round: 2,
+                    fontSize: 18,
+                    searchIconSize: 22,
+                    placeholderText: "Search",
+                });
+
+                //mySelectText = null;
+                // ITEM LIST:  
+                _itemList = ItemList({ 
+                    width: _searchInput.width, 
+                    height: "calc(100% - 276px)",
+                });
+                _itemList.top = _searchInput.top + _searchInput.height;
+                _itemList.left = _searchInput.left;
+                _itemList.setItemAlignment(ItemList.alignType.VERTICAL);
+                _itemList.setItemCreationFunction(SelectTextItem);
+                _itemList.createItemsByDataList(itemDataList);
+
+                _itemList.onSelectionChange(function(ui, self, lastSelectedItem, event) {
+
+                    if (lastSelectedItem) {
+                        lastSelectedItem.opacity = 1;
+                        lastSelectedItem.clickable = 1;
+                        ui.removeItemFromSelectedList(lastSelectedItem);
+                    }
+
+                    if (self) {
+                        self.opacity = 0.5;
+                        self.clickable = 0;
+                        ui.addItemToSelectedList(self);
+                    }
+
+                    htmPage.loadHTMLFile(itemDataList[self.getIndex()].actionValue);
+
+                    if (event) {
+                        //box.setSelectedIndex(self.getIndex());
+                        //cover.close();
+                    }
+
+                });
+                _itemList.selectItemByIndex(0);
+
+                _searchInput.onSearch = function(searchedText) {
+                    const shownItemCount = _itemList.searchItemByText(searchedText);
+                    //cover.refreshSizeAndPosition(shownItemCount);
+                }
+                */
+
+                
                 // SELECT TEXT: List of components.
                 mySelectText = SelectText({
                     top: 140,
@@ -138,6 +196,7 @@
                 };
 
                 that.setSelectedIndex(0);
+                
 
                 // LABEL: Full project example button
                 btnExample = Label({

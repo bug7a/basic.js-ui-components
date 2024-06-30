@@ -31,7 +31,7 @@ const CheckBox = function(params = {}) {
         height: 50,
         round: 4,
         box_uncheckedColor: "white",
-        box_checkedColor: "#141414", // "orangered"
+        box_checkedColor: "#141414", // "indianred"
         box_checkedIconReverseColorFilter: 1, // 0
     };
 
@@ -94,7 +94,7 @@ const CheckBox = function(params = {}) {
     
     // BOX: Cover.
     box.checkBox = Box(0, 0, 26, 26, {
-        color: "white",
+        color: (box.checked == 1) ? box.box_checkedColor : box.box_uncheckedColor,
         border: 1,
         round: 3,
     });
@@ -114,7 +114,7 @@ const CheckBox = function(params = {}) {
         width: 24,
         height: 24,
         opacity: 1,
-        visible: 0,
+        visible: (box.checked == 1) ? 1 : 0,
     });
     that.load("components/tiny-check/check.svg");
     box.checkBox.add(that);
@@ -128,9 +128,6 @@ const CheckBox = function(params = {}) {
     box.on("click", function() {
         box.toggle();
     });
-    if (box.checked == 1) {
-        box.toggle();
-    }
 
     restoreThatFromSaved();
     makeBasicObject(box);

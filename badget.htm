@@ -14,6 +14,8 @@
         <script src="basic/basic.min.js" type="text/javascript" charset="utf-8"></script>
         <!--<script src="basic/scroll-bar.min.js" type="text/javascript" charset="utf-8"></script>-->
 
+        <script src="components/badget.js" type="text/javascript" charset="utf-8"></script>
+
         <style>
 
         /* 
@@ -28,12 +30,20 @@
         <script>
         
         // VARIABLES            
-        let myString = "";
-        let myInteger = 0;
-        let myFloat = 0.5;
+        let box = null;
 
         // First running function.
         window.onload = function() {
+
+            box = Box(200, 200, 100, 100, {
+                color: "red",
+                round: 4,
+            });
+
+            box.badget = Badget({
+                target: box,
+            });
+
             
         };
         

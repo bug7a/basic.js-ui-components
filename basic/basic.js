@@ -2627,7 +2627,9 @@ window.Button = function(p1, p2, p3, p4, p5) {
 window.startObject = function() {
 
     saveCurrentThat();
-    return startBox();
+    return startBox({
+        color: "transparent", // WHY: Bir UI nesnesinin başlangıç arkaplanının "transparent" olması daha uygun.
+    });
 
 };
 
