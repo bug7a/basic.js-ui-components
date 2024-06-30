@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>Object Waiting</title>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" type="text/css" href="basic/basic.min.css">
+        <script src="basic/basic.min.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="components/object-waiting.min.js" type="text/javascript" charset="utf-8"></script>
+
+        <script>
+
+        let btnAction = null;
+        let objectWaiting = null;
+        let lblHide = null;
+        
+        window.onload = function() {
+
+            page.color = "whitesmoke";
+
+            startFlexBox();
+
+            endFlexBox();
+            
+            // BUTTON: Show waiting.
+            btnAction = Button({
+                text: "Download",
+                color: basic.ACTION2_COLOR,
+                width: 200,
+                spaceX: 20,
+                minimal: 0,
+                border: 1,
+                round: 6,
+                borderColor: "rgba(0, 0, 0, 0.3)",
+                type: 1,
+            });
+            btnAction.center();
+            page.onResize(function() {
+                btnAction.center();
+                if (btnAction.objectWaiting) {
+                    btnAction.objectWaiting.center();
+                }
+            });
+
+            btnAction.on("click", function() {
+
+                if (btnAction.type == 1) {
+
+                    // WAITING: Create object 1 time.
+                    btnAction.objectWaiting = ObjectWaiting({
+                        target: btnAction,
+                    });
+
+                    that.onHide = function() {
+                        btnAction.text = "Open";
+                        btnAction.type = 2;
+                        btnAction.center();
+                        lblHide.visible = 0;
+                    };
+
+                    lblHide.visible = 1;
+
+                }
+
+            });
+
+            // LABEL: Hide the object waiting
+            lblHide = Label({
+                left: 30,
+                top: 30,
+                text: "Hide and Remove",
+                width: "auto",
+                fontSize: 14,
+                border: 0,
+                spaceX: 12,
+                spaceY: 4,
+                round: 4,
+                color: "lightgray",
+                visible: 0,
+            });
+            that.elem.style.cursor = "pointer";
+            that.on("click", function() {
+                btnAction.objectWaiting.hide();
+            });
+
+        };
+
+        </script>
+
+    </head>
+    <body>
+        
+        <!-- HTML content -->
+        
+    </body>
+</html>

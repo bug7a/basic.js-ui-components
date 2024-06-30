@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>New Project Name</title>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+        <!-- LIBRARY FILES -->
+        <!-- <link rel="preload" href="image.png" as="image"> -->
+        <link rel="preload" href="basic/font/open-sans/OpenSans-Regular.ttf" as="font" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="basic/basic.min.css">
+        <script src="basic/basic.min.js" type="text/javascript" charset="utf-8"></script>
+        <!--<script src="basic/scroll-bar.min.js" type="text/javascript" charset="utf-8"></script>-->
+
+        <script src="components/_component-template.js" type="text/javascript" charset="utf-8"></script>
+        <!-- <script src="components/_component-template.min.js" type="text/javascript" charset="utf-8"></script> -->
+
+        <!-- ALL COMPONENTS IN ONE FILE -->
+        <!-- <script src="components/components.js" type="text/javascript" charset="utf-8"></script> -->
+
+        <script>
+        
+        // *** VARIABLES:          
+        let myString = "";
+        let myInteger = 0;
+        let myFloat = 0.5;
+        let myArray = [];
+
+        // First running function.
+        window.onload = function() {
+
+            // GROUP: Autolayout
+            startFlexBox({
+                flexDirection: "column",
+                gap: "12px",
+            });
+
+                // COMP NAME: #1
+                CompName({
+                    badget_text: "7",
+                });
+                myArray.push(that);
+
+                // COMP NAME: #2
+                CompName({
+                    badget_text: "11",
+                    box_backgroundOverColor: "#F1E2C3",
+                });
+                myArray.push(that);
+
+            endFlexBox(); // END GROUP
+
+            //myArray[1].setBadget_text("2");
+            //myArray[1].setBox_backgroundOverColor(CompName("get").box_backgroundOverColor);
+            
+        };
+        
+        // Function running every second.
+        const loop = function() {
+                        
+        };
+        
+        // *** OTHER FUNCTIONS:
+        const doSomthing1 = function() {
+            
+        };
+        
+        const doSomething2 = function() {
+            
+        };
+
+        </script>
+
+    </head>
+    <body>
+        
+        <!-- HTML content -->
+        
+    </body>
+</html>
