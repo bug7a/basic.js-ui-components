@@ -39,15 +39,23 @@
 
                 // COMP NAME: #1
                 CompName({
+                    key: "1",
                     badget_text: "7",
                 });
+                that.onClick = function(self) {
+                    println("Clicked Comp " + self.key);
+                };
                 myArray.push(that);
 
                 // COMP NAME: #2
                 CompName({
+                    key: "2",
                     badget_text: "11",
                     box_backgroundOverColor: "#F1E2C3",
                 });
+                that.onClick = function(self) {
+                    println("Clicked Comp " + self.key);
+                };
                 myArray.push(that);
 
             endFlexBox(); // END GROUP
